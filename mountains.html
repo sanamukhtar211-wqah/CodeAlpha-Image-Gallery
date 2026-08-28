@@ -1,0 +1,1458 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>WanderLens | Mountains & Waterfalls</title>
+
+
+    <!-- Google Font -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <style>
+
+        /* =========================
+           BASIC
+        ========================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+
+        body {
+
+            font-family: "Poppins", sans-serif;
+
+            background: #07111f;
+
+            color: white;
+
+            overflow-x: hidden;
+        }
+
+
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        header {
+
+            position: fixed;
+
+            top: 0;
+
+            left: 0;
+
+            width: 100%;
+
+            z-index: 1000;
+
+            background: rgba(7, 17, 31, 0.88);
+
+            backdrop-filter: blur(12px);
+
+            border-bottom:
+                1px solid rgba(255, 255, 255, 0.08);
+        }
+
+
+        nav {
+
+            max-width: 1200px;
+
+            margin: auto;
+
+            padding: 18px 25px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+        }
+
+
+        .logo {
+
+            color: white;
+
+            text-decoration: none;
+
+            font-size: 25px;
+
+            font-weight: 800;
+        }
+
+
+        .logo span {
+
+            color: #49e3c2;
+        }
+
+
+        nav ul {
+
+            display: flex;
+
+            list-style: none;
+
+            gap: 28px;
+        }
+
+
+        nav ul a {
+
+            color: #d7e5f3;
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+            transition: 0.3s;
+        }
+
+
+        nav ul a:hover {
+
+            color: #49e3c2;
+        }
+
+
+        .menu-btn {
+
+            display: none;
+
+            font-size: 27px;
+
+            cursor: pointer;
+
+            color: #49e3c2;
+        }
+
+
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+
+            min-height: 78vh;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-align: center;
+
+            padding: 130px 25px 80px;
+
+            background:
+
+                linear-gradient(
+                    rgba(3, 12, 22, 0.35),
+                    rgba(3, 12, 22, 0.88)
+                ),
+
+                url("https://images.unsplash.com/photo-1464278533981-50106e6176b1?auto=format&fit=crop&w=1800&q=90")
+                center/cover no-repeat;
+        }
+
+
+        .hero-content {
+
+            max-width: 850px;
+        }
+
+
+        .hero-content small {
+
+            color: #49e3c2;
+
+            text-transform: uppercase;
+
+            letter-spacing: 4px;
+
+            font-size: 12px;
+
+            font-weight: 600;
+        }
+
+
+        .hero-content h1 {
+
+            font-size: clamp(40px, 7vw, 72px);
+
+            line-height: 1.1;
+
+            margin: 18px 0;
+        }
+
+
+        .hero-content h1 span {
+
+            color: #49e3c2;
+        }
+
+
+        .hero-content p {
+
+            max-width: 680px;
+
+            margin: auto;
+
+            color: #d5e1ed;
+
+            line-height: 1.8;
+
+            font-size: 15px;
+        }
+
+
+        .back-btn {
+
+            display: inline-block;
+
+            margin-top: 30px;
+
+            padding: 11px 23px;
+
+            border-radius: 25px;
+
+            color: #06121f;
+
+            background: #49e3c2;
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            transition: 0.3s;
+        }
+
+
+        .back-btn:hover {
+
+            transform: translateY(-4px);
+
+            box-shadow:
+                0 10px 25px rgba(73, 227, 194, 0.25);
+        }
+
+
+
+        /* =========================
+           GALLERY
+        ========================= */
+
+        .gallery-section {
+
+            max-width: 1200px;
+
+            margin: auto;
+
+            padding: 90px 25px;
+        }
+
+
+        .section-title {
+
+            text-align: center;
+
+            margin-bottom: 45px;
+        }
+
+
+        .section-title h2 {
+
+            font-size: clamp(30px, 5vw, 44px);
+
+            margin-bottom: 10px;
+        }
+
+
+        .section-title h2 span {
+
+            color: #49e3c2;
+        }
+
+
+        .section-title p {
+
+            color: #9fb0c3;
+
+            font-size: 14px;
+        }
+
+
+
+        /* =========================
+           GALLERY GRID
+        ========================= */
+
+        .gallery {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 20px;
+        }
+
+
+        .gallery-item {
+
+            position: relative;
+
+            height: 300px;
+
+            border-radius: 18px;
+
+            overflow: hidden;
+
+            cursor: pointer;
+
+            background: #101c2c;
+
+            border:
+                1px solid rgba(73, 227, 194, 0.12);
+
+            transition: 0.4s;
+        }
+
+
+        .gallery-item img {
+
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: cover;
+
+            transition: 0.6s;
+        }
+
+
+        .gallery-item::after {
+
+            content: "";
+
+            position: absolute;
+
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    transparent 45%,
+                    rgba(0, 0, 0, 0.75)
+                );
+
+            opacity: 0.8;
+
+            pointer-events: none;
+        }
+
+
+        .gallery-item:hover {
+
+            transform: translateY(-7px);
+
+            border-color: #49e3c2;
+
+            box-shadow:
+                0 15px 35px rgba(0, 0, 0, 0.30);
+        }
+
+
+        .gallery-item:hover img {
+
+            transform: scale(1.08);
+        }
+
+
+        .image-info {
+
+            position: absolute;
+
+            z-index: 2;
+
+            left: 20px;
+
+            right: 20px;
+
+            bottom: 18px;
+
+            pointer-events: none;
+        }
+
+
+        .image-info h3 {
+
+            font-size: 18px;
+
+            margin-bottom: 4px;
+        }
+
+
+        .image-info p {
+
+            color: #c8d5e2;
+
+            font-size: 12px;
+        }
+
+
+
+        /* =========================
+           LARGE IMAGES
+        ========================= */
+
+        .gallery-item.large {
+
+            grid-column: span 2;
+
+            height: 360px;
+        }
+
+
+
+        /* =========================
+           FULL SCREEN VIEWER
+        ========================= */
+
+        .image-viewer {
+
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 3000;
+
+            background: rgba(2, 7, 14, 0.97);
+
+            display: none;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 60px 80px;
+        }
+
+
+        .image-viewer.active {
+
+            display: flex;
+        }
+
+
+        .viewer-image {
+
+            max-width: 90vw;
+
+            max-height: 82vh;
+
+            object-fit: contain;
+
+            border-radius: 12px;
+
+            box-shadow:
+                0 20px 70px rgba(0, 0, 0, 0.65);
+
+            user-select: none;
+        }
+
+
+
+        /* =========================
+           CLOSE BUTTON
+        ========================= */
+
+        .close-btn {
+
+            position: fixed;
+
+            top: 20px;
+
+            right: 28px;
+
+            width: 45px;
+
+            height: 45px;
+
+            border-radius: 50%;
+
+            border: 1px solid
+                rgba(255, 255, 255, 0.2);
+
+            background: rgba(255, 255, 255, 0.08);
+
+            color: white;
+
+            font-size: 30px;
+
+            cursor: pointer;
+
+            z-index: 3100;
+
+            transition: 0.3s;
+        }
+
+
+        .close-btn:hover {
+
+            background: #49e3c2;
+
+            color: #07111f;
+        }
+
+
+
+        /* =========================
+           NEXT / PREVIOUS BUTTONS
+        ========================= */
+
+        .viewer-btn {
+
+            position: fixed;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            width: 52px;
+
+            height: 52px;
+
+            border-radius: 50%;
+
+            border: 1px solid
+                rgba(73, 227, 194, 0.35);
+
+            background: rgba(7, 17, 31, 0.75);
+
+            color: #49e3c2;
+
+            font-size: 28px;
+
+            cursor: pointer;
+
+            z-index: 3100;
+
+            transition: 0.3s;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+        }
+
+
+        .viewer-btn:hover {
+
+            background: #49e3c2;
+
+            color: #07111f;
+
+            transform:
+                translateY(-50%) scale(1.08);
+        }
+
+
+        .prev-btn {
+
+            left: 22px;
+        }
+
+
+        .next-btn {
+
+            right: 22px;
+        }
+
+
+
+        /* =========================
+           IMAGE COUNTER
+        ========================= */
+
+        .image-counter {
+
+            position: fixed;
+
+            bottom: 22px;
+
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            color: #d8e5f1;
+
+            background: rgba(7, 17, 31, 0.75);
+
+            padding: 7px 15px;
+
+            border-radius: 20px;
+
+            font-size: 12px;
+
+            z-index: 3100;
+        }
+
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+
+            text-align: center;
+
+            padding: 25px;
+
+            background: #040a13;
+
+            border-top:
+                1px solid rgba(255, 255, 255, 0.08);
+
+            color: #8fa1b5;
+
+            font-size: 13px;
+        }
+
+
+
+        /* =========================
+           TABLET
+        ========================= */
+
+        @media (max-width: 900px) {
+
+            .gallery {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+
+            .gallery-item.large {
+
+                grid-column: span 2;
+            }
+
+
+            .image-viewer {
+
+                padding: 50px 65px;
+            }
+        }
+
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 650px) {
+
+            .menu-btn {
+
+                display: block;
+            }
+
+
+            nav ul {
+
+                position: absolute;
+
+                top: 70px;
+
+                left: -100%;
+
+                width: 100%;
+
+                background: #0b1728;
+
+                flex-direction: column;
+
+                text-align: center;
+
+                padding: 25px 0;
+
+                gap: 18px;
+
+                transition: 0.3s;
+            }
+
+
+            nav ul.active {
+
+                left: 0;
+            }
+
+
+            .gallery {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .gallery-item {
+
+                height: 280px;
+            }
+
+
+            .gallery-item.large {
+
+                grid-column: span 1;
+
+                height: 280px;
+            }
+
+
+            .gallery-section {
+
+                padding-left: 18px;
+
+                padding-right: 18px;
+            }
+
+
+            .hero {
+
+                padding-left: 18px;
+
+                padding-right: 18px;
+            }
+
+
+            .image-viewer {
+
+                padding: 60px 15px;
+            }
+
+
+            .viewer-image {
+
+                max-width: 96vw;
+
+                max-height: 75vh;
+            }
+
+
+            .viewer-btn {
+
+                width: 42px;
+
+                height: 42px;
+
+                font-size: 22px;
+            }
+
+
+            .prev-btn {
+
+                left: 10px;
+            }
+
+
+            .next-btn {
+
+                right: 10px;
+            }
+
+
+            .close-btn {
+
+                top: 15px;
+
+                right: 15px;
+
+                width: 40px;
+
+                height: 40px;
+
+                font-size: 25px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         NAVBAR
+    ========================= -->
+
+    <header>
+
+        <nav>
+
+            <a href="index.html" class="logo">
+                Wander<span>Lens</span>
+            </a>
+
+
+            <div class="menu-btn" id="menuBtn">
+                ☰
+            </div>
+
+
+            <ul id="menu">
+
+                <li>
+                    <a href="index.html">
+                        Home
+                    </a>
+                </li>
+
+                <li>
+                    <a href="mountains.html">
+                        Mountains
+                    </a>
+                </li>
+
+                <li>
+                    <a href="nature.html">
+                        Nature
+                    </a>
+                </li>
+
+                <li>
+                    <a href="landscapes.html">
+                        Landscapes
+                    </a>
+                </li>
+
+                <li>
+                    <a href="travelling.html">
+                        Travel
+                    </a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </header>
+
+
+
+    <!-- =========================
+         HERO
+    ========================= -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <small>
+                WanderLens • Nature Collection
+            </small>
+
+
+            <h1>
+                Mountains &
+                <span>Waterfalls</span>
+            </h1>
+
+
+            <p>
+                Explore majestic mountains, crystal-clear rivers,
+                powerful waterfalls and breathtaking green valleys.
+            </p>
+
+
+            <a href="index.html" class="back-btn">
+                ← Back to Home
+            </a>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         GALLERY
+    ========================= -->
+
+    <section class="gallery-section">
+
+        <div class="section-title">
+
+            <h2>
+                Into the <span>Wild</span>
+            </h2>
+
+
+            <p>
+                Click any image to view it in full screen.
+            </p>
+
+        </div>
+
+
+        <div class="gallery">
+
+
+            <!-- IMAGE 1 -->
+
+            <div class="gallery-item large">
+
+                <img
+                    src="https://images.unsplash.com/photo-1433086966358-54859d0ed716?auto=format&fit=crop&w=1400&q=90"
+                    alt="Beautiful Waterfall"
+                >
+
+
+                <div class="image-info">
+
+                    <h3>
+                        Emerald Waterfall
+                    </h3>
+
+                    <p>
+                        Crystal water flowing through a green valley
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- IMAGE 2 -->
+
+            <div class="gallery-item">
+
+                <img
+                    src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1000&q=90"
+                    alt="Mountain Landscape"
+                >
+
+
+                <div class="image-info">
+
+                    <h3>
+                        Mountain Peaks
+                    </h3>
+
+                    <p>
+                        Majestic mountains under a peaceful sky
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- IMAGE 3 -->
+
+            <div class="gallery-item">
+
+                <img
+                    src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=90"
+                    alt="Green Forest"
+                >
+
+
+                <div class="image-info">
+
+                    <h3>
+                        Green Forest
+                    </h3>
+
+                    <p>
+                        Fresh greenery surrounded by nature
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- IMAGE 4 -->
+
+            <div class="gallery-item">
+
+                <img
+                    src="https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1000&q=90"
+                    alt="Mountain Lake"
+                >
+
+
+                <div class="image-info">
+
+                    <h3>
+                        Mountain Lake
+                    </h3>
+
+                    <p>
+                        A peaceful lake beneath towering peaks
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- IMAGE 5 -->
+
+            <div class="gallery-item">
+
+                <img
+                    src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1000&q=90"
+                    alt="Mountain Valley"
+                >
+
+
+                <div class="image-info">
+
+                    <h3>
+                        Hidden Valley
+                    </h3>
+
+                    <p>
+                        Lush valleys surrounded by mountains
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- IMAGE 6 -->
+
+            <div class="gallery-item large">
+
+                <img
+                    src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1400&q=90"
+                    alt="Waterfall and Green Mountains"
+                >
+
+
+                <div class="image-info">
+
+                    <h3>
+                        Wild Nature
+                    </h3>
+
+                    <p>
+                        Water, mountains and vibrant greenery together
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- IMAGE 7 -->
+
+            <div class="gallery-item">
+
+                <img
+                    src="https://images.unsplash.com/photo-1464278533981-50106e6176b1?auto=format&fit=crop&w=1000&q=90"
+                    alt="Snowy Mountains"
+                >
+
+
+                <div class="image-info">
+
+                    <h3>
+                        Snowy Mountains
+                    </h3>
+
+                    <p>
+                        Cold peaks touching the clouds
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- IMAGE 8 -->
+
+            <div class="gallery-item">
+
+                <img
+                    src="https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=1000&q=90"
+                    alt="Waterfall Nature"
+                >
+
+
+                <div class="image-info">
+
+                    <h3>
+                        Forest Falls
+                    </h3>
+
+                    <p>
+                        A beautiful waterfall hidden in the forest
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         FULL SCREEN IMAGE VIEWER
+    ========================= -->
+
+    <div class="image-viewer" id="imageViewer">
+
+
+        <!-- CLOSE -->
+
+        <button class="close-btn" id="closeBtn">
+            ×
+        </button>
+
+
+        <!-- PREVIOUS -->
+
+        <button
+            class="viewer-btn prev-btn"
+            id="prevBtn"
+            aria-label="Previous Image"
+        >
+            ←
+        </button>
+
+
+        <!-- IMAGE -->
+
+        <img
+            class="viewer-image"
+            id="viewerImage"
+            src=""
+            alt="Full Image"
+        >
+
+
+        <!-- NEXT -->
+
+        <button
+            class="viewer-btn next-btn"
+            id="nextBtn"
+            aria-label="Next Image"
+        >
+            →
+        </button>
+
+
+        <!-- COUNTER -->
+
+        <div class="image-counter" id="imageCounter">
+            1 / 8
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer>
+
+        © 2026 WanderLens | Mountains & Waterfalls
+
+    </footer>
+
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
+
+    <script>
+
+
+        /* =========================
+           MOBILE MENU
+        ========================= */
+
+        const menuBtn =
+            document.getElementById("menuBtn");
+
+        const menu =
+            document.getElementById("menu");
+
+
+        menuBtn.addEventListener("click", function () {
+
+            menu.classList.toggle("active");
+
+        });
+
+
+        const menuLinks =
+            document.querySelectorAll("#menu a");
+
+
+        menuLinks.forEach(function (link) {
+
+            link.addEventListener("click", function () {
+
+                menu.classList.remove("active");
+
+            });
+
+        });
+
+
+
+        /* =========================
+           IMAGE VIEWER
+        ========================= */
+
+        const images =
+            document.querySelectorAll(".gallery-item img");
+
+
+        const imageViewer =
+            document.getElementById("imageViewer");
+
+
+        const viewerImage =
+            document.getElementById("viewerImage");
+
+
+        const closeBtn =
+            document.getElementById("closeBtn");
+
+
+        const prevBtn =
+            document.getElementById("prevBtn");
+
+
+        const nextBtn =
+            document.getElementById("nextBtn");
+
+
+        const imageCounter =
+            document.getElementById("imageCounter");
+
+
+        let currentImage = 0;
+
+
+
+        /* =========================
+           OPEN IMAGE
+        ========================= */
+
+        images.forEach(function (image, index) {
+
+            image.addEventListener("click", function () {
+
+                currentImage = index;
+
+                showImage();
+
+                imageViewer.classList.add("active");
+
+                document.body.style.overflow = "hidden";
+
+            });
+
+        });
+
+
+
+        /* =========================
+           SHOW IMAGE
+        ========================= */
+
+        function showImage() {
+
+            viewerImage.src =
+                images[currentImage].src;
+
+            viewerImage.alt =
+                images[currentImage].alt;
+
+            imageCounter.textContent =
+                (currentImage + 1) +
+                " / " +
+                images.length;
+        }
+
+
+
+        /* =========================
+           NEXT IMAGE
+        ========================= */
+
+        nextBtn.addEventListener("click", function () {
+
+            currentImage++;
+
+            if (currentImage >= images.length) {
+
+                currentImage = 0;
+
+            }
+
+            showImage();
+
+        });
+
+
+
+        /* =========================
+           PREVIOUS IMAGE
+        ========================= */
+
+        prevBtn.addEventListener("click", function () {
+
+            currentImage--;
+
+            if (currentImage < 0) {
+
+                currentImage = images.length - 1;
+
+            }
+
+            showImage();
+
+        });
+
+
+
+        /* =========================
+           CLOSE VIEWER
+        ========================= */
+
+        closeBtn.addEventListener("click", closeViewer);
+
+
+        function closeViewer() {
+
+            imageViewer.classList.remove("active");
+
+            document.body.style.overflow = "auto";
+
+        }
+
+
+
+        /* =========================
+           CLICK OUTSIDE IMAGE
+        ========================= */
+
+        imageViewer.addEventListener("click", function (event) {
+
+            if (event.target === imageViewer) {
+
+                closeViewer();
+
+            }
+
+        });
+
+
+
+        /* =========================
+           KEYBOARD CONTROLS
+        ========================= */
+
+        document.addEventListener("keydown", function (event) {
+
+            if (!imageViewer.classList.contains("active")) {
+
+                return;
+
+            }
+
+
+            if (event.key === "ArrowRight") {
+
+                currentImage++;
+
+                if (currentImage >= images.length) {
+
+                    currentImage = 0;
+
+                }
+
+                showImage();
+
+            }
+
+
+            if (event.key === "ArrowLeft") {
+
+                currentImage--;
+
+                if (currentImage < 0) {
+
+                    currentImage = images.length - 1;
+
+                }
+
+                showImage();
+
+            }
+
+
+            if (event.key === "Escape") {
+
+                closeViewer();
+
+            }
+
+        });
+
+    </script>
+
+
+</body>
+
+</html>

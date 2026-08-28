@@ -1,0 +1,1553 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>WanderLens | Travelling</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+
+        /* =========================
+           BASIC
+        ========================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Poppins", sans-serif;
+            background: #07111f;
+            color: white;
+            overflow-x: hidden;
+        }
+
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+
+            background: rgba(7, 17, 31, 0.88);
+
+            backdrop-filter: blur(12px);
+
+            border-bottom:
+                1px solid rgba(255,255,255,0.08);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: auto;
+
+            padding: 18px 25px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            text-decoration: none;
+            color: white;
+
+            font-size: 25px;
+            font-weight: 800;
+        }
+
+        .logo span {
+            color: #49e3c2;
+        }
+
+        nav ul {
+            list-style: none;
+
+            display: flex;
+
+            gap: 28px;
+        }
+
+        nav ul a {
+            color: #dbe7f3;
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+            transition: 0.3s;
+        }
+
+        nav ul a:hover,
+        nav ul a.active {
+            color: #49e3c2;
+        }
+
+        .menu-btn {
+            display: none;
+
+            font-size: 27px;
+
+            cursor: pointer;
+        }
+
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+
+            min-height: 65vh;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-align: center;
+
+            padding: 130px 25px 70px;
+
+            background:
+
+                linear-gradient(
+                    rgba(3,10,20,0.43),
+                    rgba(3,10,20,0.90)
+                ),
+
+                url("https://i.tribune.com.pk/media/images/1022442-lahore-1452058823/1022442-lahore-1452058823-640x480.webp")
+
+                center/cover no-repeat;
+        }
+
+        .hero-content {
+            max-width: 850px;
+        }
+
+        .hero-content small {
+
+            color: #49e3c2;
+
+            letter-spacing: 3px;
+
+            text-transform: uppercase;
+
+            font-weight: 600;
+
+            margin-bottom: 15px;
+
+            display: inline-block;
+        }
+
+        .hero-content h1 {
+
+            font-size: clamp(40px, 7vw, 70px);
+
+            line-height: 1.1;
+
+            margin-bottom: 20px;
+
+            text-shadow:
+                0 5px 25px rgba(0,0,0,0.6);
+        }
+
+        .hero-content h1 span {
+            color: #49e3c2;
+        }
+
+        .hero-content p {
+
+            color: #d7e1ec;
+
+            max-width: 680px;
+
+            margin: auto;
+
+            line-height: 1.8;
+
+            font-size: 15px;
+        }
+
+
+        /* =========================
+           GALLERY SECTION
+        ========================= */
+
+        .gallery-section {
+
+            max-width: 1200px;
+
+            margin: auto;
+
+            padding: 85px 25px;
+        }
+
+        .section-title {
+
+            text-align: center;
+
+            margin-bottom: 45px;
+        }
+
+        .section-title h2 {
+
+            font-size: clamp(30px, 5vw, 45px);
+
+            margin-bottom: 10px;
+        }
+
+        .section-title h2 span {
+            color: #49e3c2;
+        }
+
+        .section-title p {
+            color: #aebdce;
+            font-size: 14px;
+        }
+
+
+        /* =========================
+           CATEGORY TITLE
+        ========================= */
+
+        .category-title {
+
+            font-size: 25px;
+
+            color: #49e3c2;
+
+            margin: 55px 0 22px;
+        }
+
+
+        /* =========================
+           GALLERY GRID
+        ========================= */
+
+        .gallery {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 22px;
+        }
+
+
+        /* =========================
+           IMAGE CARD
+        ========================= */
+
+        .gallery-card {
+
+            position: relative;
+
+            height: 300px;
+
+            overflow: hidden;
+
+            border-radius: 20px;
+
+            cursor: pointer;
+
+            background: #111c2b;
+
+            border:
+                1px solid rgba(255,255,255,0.08);
+
+            transition: 0.4s;
+        }
+
+        .gallery-card:hover {
+
+            transform: translateY(-7px);
+
+            border-color: #49e3c2;
+
+            box-shadow:
+                0 15px 35px
+                rgba(73,227,194,0.16);
+        }
+
+        .gallery-card img {
+
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: cover;
+
+            display: block;
+
+            transition: 0.6s;
+        }
+
+        .gallery-card:hover img {
+            transform: scale(1.08);
+        }
+
+        .gallery-card::after {
+
+            content: "";
+
+            position: absolute;
+
+            inset: 0;
+
+            background:
+
+                linear-gradient(
+                    transparent 35%,
+                    rgba(0,0,0,0.88)
+                );
+        }
+
+
+        /* =========================
+           IMAGE TEXT
+        ========================= */
+
+        .image-info {
+
+            position: absolute;
+
+            z-index: 2;
+
+            left: 20px;
+
+            right: 20px;
+
+            bottom: 18px;
+        }
+
+        .image-info h3 {
+
+            font-size: 19px;
+
+            margin-bottom: 5px;
+        }
+
+        .image-info p {
+
+            color: #d5dee8;
+
+            font-size: 12px;
+
+            line-height: 1.5;
+        }
+
+
+        /* =========================
+           LIGHTBOX
+        ========================= */
+
+        .lightbox {
+
+            position: fixed;
+
+            inset: 0;
+
+            background:
+                rgba(0,0,0,0.94);
+
+            z-index: 3000;
+
+            display: none;
+
+            justify-content: center;
+
+            align-items: center;
+
+            padding: 25px;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox img {
+
+            max-width: 88%;
+
+            max-height: 82vh;
+
+            object-fit: contain;
+
+            border-radius: 12px;
+
+            box-shadow:
+                0 0 40px
+                rgba(73,227,194,0.18);
+        }
+
+
+        /* =========================
+           CLOSE BUTTON
+        ========================= */
+
+        .close-btn {
+
+            position: absolute;
+
+            top: 20px;
+
+            right: 25px;
+
+            width: 45px;
+
+            height: 45px;
+
+            border-radius: 50%;
+
+            border:
+                1px solid #49e3c2;
+
+            background:
+                rgba(73,227,194,0.1);
+
+            color: white;
+
+            font-size: 28px;
+
+            cursor: pointer;
+
+            z-index: 5;
+        }
+
+        .close-btn:hover {
+
+            background: #49e3c2;
+
+            color: #07111f;
+        }
+
+
+        /* =========================
+           NEXT / PREVIOUS
+        ========================= */
+
+        .prev,
+        .next {
+
+            position: absolute;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            width: 50px;
+
+            height: 50px;
+
+            border-radius: 50%;
+
+            border:
+                1px solid #49e3c2;
+
+            background:
+                rgba(73,227,194,0.1);
+
+            color: white;
+
+            font-size: 23px;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+
+            z-index: 5;
+        }
+
+        .prev {
+            left: 25px;
+        }
+
+        .next {
+            right: 25px;
+        }
+
+        .prev:hover,
+        .next:hover {
+
+            background: #49e3c2;
+
+            color: #07111f;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+
+            text-align: center;
+
+            padding: 25px;
+
+            background: #040a13;
+
+            border-top:
+                1px solid rgba(255,255,255,0.08);
+
+            color: #94a5b8;
+
+            font-size: 13px;
+        }
+
+
+        /* =========================
+           TABLET
+        ========================= */
+
+        @media (max-width: 900px) {
+
+            .gallery {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .gallery-card {
+
+                height: 280px;
+            }
+        }
+
+
+        /* =========================
+           MOBILE MENU
+        ========================= */
+
+        @media (max-width: 800px) {
+
+            .menu-btn {
+
+                display: block;
+            }
+
+            nav ul {
+
+                position: absolute;
+
+                top: 70px;
+
+                left: -100%;
+
+                width: 100%;
+
+                background: #091524;
+
+                flex-direction: column;
+
+                text-align: center;
+
+                padding: 25px 0;
+
+                gap: 18px;
+
+                transition: 0.3s;
+            }
+
+            nav ul.active {
+
+                left: 0;
+            }
+
+            .gallery {
+
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-card {
+
+                height: 280px;
+            }
+
+            .prev {
+
+                left: 8px;
+            }
+
+            .next {
+
+                right: 8px;
+            }
+
+            .lightbox img {
+
+                max-width: 82%;
+            }
+        }
+
+
+        /* =========================
+           SMALL MOBILE
+        ========================= */
+
+        @media (max-width: 600px) {
+
+            nav {
+
+                padding: 16px 18px;
+            }
+
+            .logo {
+
+                font-size: 22px;
+            }
+
+            .hero {
+
+                min-height: 60vh;
+
+                padding-left: 18px;
+
+                padding-right: 18px;
+            }
+
+            .hero-content p {
+
+                font-size: 14px;
+            }
+
+            .gallery-section {
+
+                padding-left: 18px;
+
+                padding-right: 18px;
+            }
+
+            .gallery-card {
+
+                height: 280px;
+            }
+
+            .category-title {
+
+                font-size: 21px;
+            }
+
+            .lightbox {
+
+                padding: 12px;
+            }
+
+            .lightbox img {
+
+                max-width: 90%;
+
+                max-height: 75vh;
+            }
+
+            .prev,
+            .next {
+
+                width: 42px;
+
+                height: 42px;
+
+                font-size: 18px;
+            }
+
+            .prev {
+
+                left: 8px;
+            }
+
+            .next {
+
+                right: 8px;
+            }
+
+            .close-btn {
+
+                top: 12px;
+
+                right: 12px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         NAVBAR
+    ========================= -->
+
+    <header>
+
+        <nav>
+
+            <a href="index.html" class="logo">
+                Wander<span>Lens</span>
+            </a>
+
+
+            <div class="menu-btn" id="menuBtn">
+                ☰
+            </div>
+
+
+            <ul id="menu">
+
+                <li>
+                    <a href="index.html">
+                        Home
+                    </a>
+                </li>
+
+                <li>
+                    <a href="mountains.html">
+                        Mountains
+                    </a>
+                </li>
+
+                <li>
+                    <a href="nature.html">
+                        Nature
+                    </a>
+                </li>
+
+                <li>
+                    <a href="landscapes.html">
+                        Landscape
+                    </a>
+                </li>
+
+                <li>
+                    <a href="travelling.html" class="active">
+                        Travelling
+                    </a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </header>
+
+
+
+    <!-- =========================
+         HERO
+    ========================= -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <small>
+                WanderLens • Pakistan Travel
+            </small>
+
+
+            <h1>
+
+                Explore
+                <span>Pakistan</span>
+
+            </h1>
+
+
+            <p>
+
+                Discover unforgettable journeys through
+                historic cities, famous mosques, peaceful
+                valleys, mountain roads and beautiful
+                destinations across Pakistan.
+
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         GALLERY
+    ========================= -->
+
+    <section class="gallery-section">
+
+
+        <div class="section-title">
+
+            <h2>
+                Pakistan <span>Travel</span>
+            </h2>
+
+            <p>
+                Explore beautiful places and memorable
+                travel destinations. Click any image
+                to view it in full screen.
+            </p>
+
+        </div>
+
+
+
+        <!-- =========================
+             HERITAGE PLACES
+        ========================= -->
+
+        <h2 class="category-title">
+            🕌 Historic & Heritage Places
+        </h2>
+
+
+        <div class="gallery">
+
+
+            <!-- BADSHAHI MOSQUE -->
+
+            <div class="gallery-card">
+
+                <img
+                    src="https://i.tribune.com.pk/media/images/1022442-lahore-1452058823/1022442-lahore-1452058823-640x480.webp"
+                    alt="Badshahi Mosque Lahore"
+                    loading="lazy">
+
+                <div class="image-info">
+
+                    <h3>
+                        Badshahi Mosque
+                    </h3>
+
+                    <p>
+                        A magnificent Mughal landmark
+                        visited by travelers in Lahore.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- LAHORE FORT -->
+
+            <div class="gallery-card">
+
+                <img
+                    src="https://ak-d.tripcdn.com/images/100u0r000000hb4ilAC2A.jpg"
+                    alt="Lahore Fort Pakistan"
+                    loading="lazy">
+
+                <div class="image-info">
+
+                    <h3>
+                        Lahore Fort
+                    </h3>
+
+                    <p>
+                        Explore the historic architecture
+                        and gardens of Lahore Fort.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- MOSQUE -->
+
+            <div class="gallery-card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=90"
+                    alt="Beautiful Mosque Architecture"
+                    loading="lazy">
+
+                <div class="image-info">
+
+                    <h3>
+                        Mosque Architecture
+                    </h3>
+
+                    <p>
+                        Beautiful Islamic architecture
+                        loved by travel photographers.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =========================
+             NORTHERN TRAVEL
+        ========================= -->
+
+        <h2 class="category-title">
+            🏔️ Northern Pakistan
+        </h2>
+
+
+        <div class="gallery">
+
+
+            <!-- SKARDU -->
+
+            <div class="gallery-card">
+
+                <img
+                    src="https://www.10a-tours.com/wp-content/uploads/2019/11/AdventureOO-Skardu-Valley-Overland-Tour-17-Shangrila-Resort-on-guided-Overland-Tour-in-Skardu-Valley-Pakistan.jpg"
+                    alt="Skardu Valley Pakistan"
+                    loading="lazy">
+
+                <div class="image-info">
+
+                    <h3>
+                        Skardu Valley
+                    </h3>
+
+                    <p>
+                        Peaceful lakes, green landscapes
+                        and dramatic mountain scenery.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- HUNZA -->
+
+            <div class="gallery-card">
+
+                <img
+                    src="https://www.imusafir.pk/wp-content/uploads/2023/10/Autum-season-in-Hunza-Valley.jpg"
+                    alt="Hunza Valley Pakistan"
+                    loading="lazy">
+
+                <div class="image-info">
+
+                    <h3>
+                        Hunza Valley
+                    </h3>
+
+                    <p>
+                        A breathtaking mountain valley
+                        surrounded by autumn colors.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- SKARDU LAKE -->
+
+            <div class="gallery-card">
+
+                <img
+                    src="https://chogoriadventure.com/uploads/2021/01/skardu-valley.jpg"
+                    alt="Skardu Lake and Mountains"
+                    loading="lazy">
+
+                <div class="image-info">
+
+                    <h3>
+                        Skardu Lakes
+                    </h3>
+
+                    <p>
+                        Crystal-clear water surrounded
+                        by beautiful mountain landscapes.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =========================
+             TRAVEL EXPERIENCES
+        ========================= -->
+
+        <h2 class="category-title">
+            🚗 Travel & Adventure
+        </h2>
+
+
+        <div class="gallery">
+
+
+            <!-- TRAVEL MOUNTAINS -->
+
+            <div class="gallery-card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=90"
+                    alt="Mountain Travel"
+                    loading="lazy">
+
+                <div class="image-info">
+
+                    <h3>
+                        Mountain Journey
+                    </h3>
+
+                    <p>
+                        A scenic journey through
+                        breathtaking mountain roads.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ROAD TRIP -->
+
+            <div class="gallery-card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1200&q=90"
+                    alt="Scenic Road Trip"
+                    loading="lazy">
+
+                <div class="image-info">
+
+                    <h3>
+                        Scenic Road Trip
+                    </h3>
+
+                    <p>
+                        Beautiful landscapes waiting
+                        to be discovered on the road.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- TRAVEL LANDSCAPE -->
+
+            <div class="gallery-card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1486911278844-a81c5267e227?auto=format&fit=crop&w=1200&q=90"
+                    alt="Travel Landscape"
+                    loading="lazy">
+
+                <div class="image-info">
+
+                    <h3>
+                        Valley Adventure
+                    </h3>
+
+                    <p>
+                        A memorable outdoor journey
+                        surrounded by mountains.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =========================
+             CITY TRAVEL
+        ========================= -->
+
+        <h2 class="category-title">
+            🌆 City & Cultural Travel
+        </h2>
+
+
+        <div class="gallery">
+
+
+            <!-- CITY -->
+
+            <div class="gallery-card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&w=1200&q=90"
+                    alt="City Travel"
+                    loading="lazy">
+
+                <div class="image-info">
+
+                    <h3>
+                        City Lights
+                    </h3>
+
+                    <p>
+                        Discover vibrant city life
+                        and beautiful evening views.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- OLD STREET -->
+
+            <div class="gallery-card">
+
+                <img
+                    src="https://bilaltravels.net/wp-content/uploads/2023/07/Faisal_Mosque_Bilal_travels-2048x1152.jpg"
+                    alt="Travel Mosque"
+                    loading="lazy">
+
+                <div class="image-info">
+
+                    <h3>
+                        Cultural Mosque
+                    </h3>
+
+                    <p>
+                        Experience mosque.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- LANDMARK -->
+
+            <div class="gallery-card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1200&q=90"
+                    alt="Travel Landmark"
+                    loading="lazy">
+
+                <div class="image-info">
+
+                    <h3>
+                        Travel Landmark
+                    </h3>
+
+                    <p>
+                        Famous places that make every
+                        journey unforgettable.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =========================
+         LIGHTBOX
+    ========================= -->
+
+    <div class="lightbox" id="lightbox">
+
+
+        <button
+            class="close-btn"
+            id="closeBtn">
+
+            ×
+
+        </button>
+
+
+        <button
+            class="prev"
+            id="prevBtn">
+
+            ❮
+
+        </button>
+
+
+        <img
+            src=""
+            alt="Travel Image"
+            id="lightboxImage">
+
+
+        <button
+            class="next"
+            id="nextBtn">
+
+            ❯
+
+        </button>
+
+
+    </div>
+
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer>
+
+        © 2026 WanderLens |
+        Pakistan Traveling Gallery
+
+    </footer>
+
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
+
+    <script>
+
+        /* =========================
+           MOBILE MENU
+        ========================= */
+
+        const menuBtn =
+            document.getElementById("menuBtn");
+
+        const menu =
+            document.getElementById("menu");
+
+
+        menuBtn.addEventListener(
+            "click",
+            function () {
+
+                menu.classList.toggle("active");
+
+            }
+        );
+
+
+        const menuLinks =
+            document.querySelectorAll("#menu a");
+
+
+        menuLinks.forEach(
+            function (link) {
+
+                link.addEventListener(
+                    "click",
+                    function () {
+
+                        menu.classList.remove("active");
+
+                    }
+                );
+
+            }
+        );
+
+
+
+        /* =========================
+           LIGHTBOX
+        ========================= */
+
+        const cards =
+            document.querySelectorAll(".gallery-card");
+
+
+        const lightbox =
+            document.getElementById("lightbox");
+
+
+        const lightboxImage =
+            document.getElementById("lightboxImage");
+
+
+        const closeBtn =
+            document.getElementById("closeBtn");
+
+
+        const prevBtn =
+            document.getElementById("prevBtn");
+
+
+        const nextBtn =
+            document.getElementById("nextBtn");
+
+
+        let currentIndex = 0;
+
+
+        const images = [];
+
+
+        cards.forEach(function (card) {
+
+            const image =
+                card.querySelector("img");
+
+            images.push(image);
+
+        });
+
+
+
+        /* =========================
+           OPEN IMAGE
+        ========================= */
+
+        cards.forEach(
+            function (card, index) {
+
+                card.addEventListener(
+                    "click",
+                    function () {
+
+                        currentIndex = index;
+
+                        showImage();
+
+                        lightbox.classList.add(
+                            "active"
+                        );
+
+                        document.body.style.overflow =
+                            "hidden";
+
+                    }
+                );
+
+            }
+        );
+
+
+
+        /* =========================
+           SHOW IMAGE
+        ========================= */
+
+        function showImage() {
+
+            lightboxImage.src =
+                images[currentIndex].src;
+
+            lightboxImage.alt =
+                images[currentIndex].alt;
+
+        }
+
+
+
+        /* =========================
+           NEXT
+        ========================= */
+
+        nextBtn.addEventListener(
+            "click",
+            function (event) {
+
+                event.stopPropagation();
+
+                currentIndex++;
+
+                if (
+                    currentIndex >=
+                    images.length
+                ) {
+
+                    currentIndex = 0;
+
+                }
+
+                showImage();
+
+            }
+        );
+
+
+
+        /* =========================
+           PREVIOUS
+        ========================= */
+
+        prevBtn.addEventListener(
+            "click",
+            function (event) {
+
+                event.stopPropagation();
+
+                currentIndex--;
+
+                if (
+                    currentIndex < 0
+                ) {
+
+                    currentIndex =
+                        images.length - 1;
+
+                }
+
+                showImage();
+
+            }
+        );
+
+
+
+        /* =========================
+           CLOSE
+        ========================= */
+
+        function closeLightbox() {
+
+            lightbox.classList.remove(
+                "active"
+            );
+
+            document.body.style.overflow =
+                "";
+
+        }
+
+
+        closeBtn.addEventListener(
+            "click",
+            function (event) {
+
+                event.stopPropagation();
+
+                closeLightbox();
+
+            }
+        );
+
+
+
+        /* =========================
+           CLICK OUTSIDE
+        ========================= */
+
+        lightbox.addEventListener(
+            "click",
+            function (event) {
+
+                if (
+                    event.target === lightbox
+                ) {
+
+                    closeLightbox();
+
+                }
+
+            }
+        );
+
+
+
+        /* =========================
+           KEYBOARD
+        ========================= */
+
+        document.addEventListener(
+            "keydown",
+            function (event) {
+
+                if (
+                    !lightbox.classList.contains(
+                        "active"
+                    )
+                ) {
+
+                    return;
+                }
+
+
+                if (
+                    event.key ===
+                    "ArrowRight"
+                ) {
+
+                    nextBtn.click();
+
+                }
+
+
+                if (
+                    event.key ===
+                    "ArrowLeft"
+                ) {
+
+                    prevBtn.click();
+
+                }
+
+
+                if (
+                    event.key ===
+                    "Escape"
+                ) {
+
+                    closeBtn.click();
+
+                }
+
+            }
+        );
+
+    </script>
+
+
+</body>
+
+</html>

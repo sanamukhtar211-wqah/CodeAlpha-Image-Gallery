@@ -1,0 +1,1530 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>WanderLens | Nature & Greenery</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+
+        /* =========================
+           BASIC
+        ========================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Poppins", sans-serif;
+            background: #07111f;
+            color: white;
+        }
+
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+
+            background: rgba(7, 17, 31, 0.88);
+
+            backdrop-filter: blur(12px);
+
+            border-bottom:
+                1px solid rgba(255,255,255,0.08);
+        }
+
+
+        nav {
+            max-width: 1200px;
+            margin: auto;
+
+            padding: 18px 25px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+
+        .logo {
+            text-decoration: none;
+            color: white;
+
+            font-size: 25px;
+            font-weight: 800;
+        }
+
+
+        .logo span {
+            color: #49e3c2;
+        }
+
+
+        nav ul {
+            list-style: none;
+
+            display: flex;
+
+            gap: 28px;
+        }
+
+
+        nav ul a {
+            color: #dbe7f3;
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+            transition: 0.3s;
+        }
+
+
+        nav ul a:hover,
+        nav ul a.active {
+            color: #49e3c2;
+        }
+
+
+        .menu-btn {
+            display: none;
+
+            font-size: 27px;
+
+            cursor: pointer;
+        }
+
+
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+
+            min-height: 65vh;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-align: center;
+
+            padding: 130px 25px 70px;
+
+            background:
+
+                linear-gradient(
+                    rgba(3,10,20,0.45),
+                    rgba(3,10,20,0.88)
+                ),
+
+                url("https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=1800&q=90")
+
+                center/cover no-repeat;
+        }
+
+
+        .hero-content {
+            max-width: 850px;
+        }
+
+
+        .hero-content small {
+
+            color: #49e3c2;
+
+            letter-spacing: 3px;
+
+            text-transform: uppercase;
+
+            font-weight: 600;
+
+            margin-bottom: 15px;
+
+            display: inline-block;
+        }
+
+
+        .hero-content h1 {
+
+            font-size: clamp(40px, 7vw, 70px);
+
+            line-height: 1.1;
+
+            margin-bottom: 20px;
+        }
+
+
+        .hero-content h1 span {
+            color: #49e3c2;
+        }
+
+
+        .hero-content p {
+
+            color: #d7e1ec;
+
+            max-width: 680px;
+
+            margin: auto;
+
+            line-height: 1.8;
+
+            font-size: 15px;
+        }
+
+
+
+        /* =========================
+           GALLERY SECTION
+        ========================= */
+
+        .gallery-section {
+
+            max-width: 1200px;
+
+            margin: auto;
+
+            padding: 85px 25px;
+        }
+
+
+        .section-title {
+
+            text-align: center;
+
+            margin-bottom: 45px;
+        }
+
+
+        .section-title h2 {
+
+            font-size: clamp(30px, 5vw, 45px);
+
+            margin-bottom: 10px;
+        }
+
+
+        .section-title h2 span {
+            color: #49e3c2;
+        }
+
+
+        .section-title p {
+            color: #aebdce;
+            font-size: 14px;
+        }
+
+
+
+        /* =========================
+           CATEGORY TITLE
+        ========================= */
+
+        .category-title {
+
+            font-size: 25px;
+
+            color: #49e3c2;
+
+            margin: 55px 0 22px;
+        }
+
+
+
+        /* =========================
+           GALLERY GRID
+        ========================= */
+
+        .gallery {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 22px;
+        }
+
+
+
+        /* =========================
+           IMAGE CARD
+        ========================= */
+
+        .gallery-card {
+
+            position: relative;
+
+            height: 300px;
+
+            overflow: hidden;
+
+            border-radius: 20px;
+
+            cursor: pointer;
+
+            background: #111c2b;
+
+            border:
+                1px solid rgba(255,255,255,0.08);
+
+            transition: 0.4s;
+        }
+
+
+        .gallery-card:hover {
+
+            transform: translateY(-7px);
+
+            border-color: #49e3c2;
+
+            box-shadow:
+                0 15px 35px
+                rgba(73,227,194,0.16);
+        }
+
+
+        .gallery-card img {
+
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: cover;
+
+            transition: 0.6s;
+        }
+
+
+        .gallery-card:hover img {
+
+            transform: scale(1.08);
+        }
+
+
+        .gallery-card::after {
+
+            content: "";
+
+            position: absolute;
+
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    transparent 35%,
+                    rgba(0,0,0,0.88)
+                );
+        }
+
+
+
+        /* =========================
+           IMAGE TEXT
+        ========================= */
+
+        .image-info {
+
+            position: absolute;
+
+            z-index: 2;
+
+            left: 20px;
+
+            right: 20px;
+
+            bottom: 18px;
+        }
+
+
+        .image-info h3 {
+
+            font-size: 19px;
+
+            margin-bottom: 5px;
+        }
+
+
+        .image-info p {
+
+            color: #d5dee8;
+
+            font-size: 12px;
+
+            line-height: 1.5;
+        }
+
+
+
+        /* =========================
+           LIGHTBOX
+        ========================= */
+
+        .lightbox {
+
+            position: fixed;
+
+            inset: 0;
+
+            background:
+                rgba(0,0,0,0.94);
+
+            z-index: 3000;
+
+            display: none;
+
+            justify-content: center;
+
+            align-items: center;
+
+            padding: 25px;
+        }
+
+
+        .lightbox.active {
+
+            display: flex;
+        }
+
+
+        .lightbox img {
+
+            max-width: 88%;
+
+            max-height: 82vh;
+
+            object-fit: contain;
+
+            border-radius: 12px;
+
+            box-shadow:
+                0 0 40px
+                rgba(73,227,194,0.18);
+        }
+
+
+
+        /* =========================
+           CLOSE BUTTON
+        ========================= */
+
+        .close-btn {
+
+            position: absolute;
+
+            top: 20px;
+
+            right: 25px;
+
+            width: 45px;
+
+            height: 45px;
+
+            border-radius: 50%;
+
+            border:
+                1px solid #49e3c2;
+
+            background:
+                rgba(73,227,194,0.1);
+
+            color: white;
+
+            font-size: 28px;
+
+            cursor: pointer;
+
+            z-index: 5;
+        }
+
+
+        .close-btn:hover {
+
+            background: #49e3c2;
+
+            color: #07111f;
+        }
+
+
+
+        /* =========================
+           NEXT / PREVIOUS
+        ========================= */
+
+        .prev,
+        .next {
+
+            position: absolute;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            width: 50px;
+
+            height: 50px;
+
+            border-radius: 50%;
+
+            border:
+                1px solid #49e3c2;
+
+            background:
+                rgba(73,227,194,0.1);
+
+            color: white;
+
+            font-size: 23px;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+
+            z-index: 5;
+        }
+
+
+        .prev {
+            left: 25px;
+        }
+
+
+        .next {
+            right: 25px;
+        }
+
+
+        .prev:hover,
+        .next:hover {
+
+            background: #49e3c2;
+
+            color: #07111f;
+        }
+
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+
+            text-align: center;
+
+            padding: 25px;
+
+            background: #040a13;
+
+            border-top:
+                1px solid rgba(255,255,255,0.08);
+
+            color: #94a5b8;
+
+            font-size: 13px;
+        }
+
+
+
+        /* =========================
+           TABLET
+        ========================= */
+
+        @media (max-width: 900px) {
+
+            .gallery {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+        }
+
+
+
+        /* =========================
+           MOBILE MENU
+        ========================= */
+
+        @media (max-width: 800px) {
+
+            .menu-btn {
+
+                display: block;
+            }
+
+
+            nav ul {
+
+                position: absolute;
+
+                top: 70px;
+
+                left: -100%;
+
+                width: 100%;
+
+                background: #091524;
+
+                flex-direction: column;
+
+                text-align: center;
+
+                padding: 25px 0;
+
+                gap: 18px;
+
+                transition: 0.3s;
+            }
+
+
+            nav ul.active {
+
+                left: 0;
+            }
+
+        }
+
+
+
+        /* =========================
+           SMALL MOBILE
+        ========================= */
+
+        @media (max-width: 600px) {
+
+            nav {
+
+                padding: 16px 18px;
+            }
+
+
+            .logo {
+                font-size: 22px;
+            }
+
+
+            .hero {
+
+                min-height: 60vh;
+
+                padding-left: 18px;
+
+                padding-right: 18px;
+            }
+
+
+            .hero-content p {
+
+                font-size: 14px;
+            }
+
+
+            .gallery-section {
+
+                padding-left: 18px;
+
+                padding-right: 18px;
+            }
+
+
+            .gallery {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .gallery-card {
+
+                height: 280px;
+            }
+
+
+            .category-title {
+
+                font-size: 21px;
+            }
+
+
+            .lightbox {
+
+                padding: 12px;
+            }
+
+
+            .lightbox img {
+
+                max-width: 90%;
+
+                max-height: 75vh;
+            }
+
+
+            .prev,
+            .next {
+
+                width: 42px;
+
+                height: 42px;
+
+                font-size: 18px;
+            }
+
+
+            .prev {
+                left: 8px;
+            }
+
+
+            .next {
+                right: 8px;
+            }
+
+
+            .close-btn {
+
+                top: 12px;
+
+                right: 12px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         NAVBAR
+    ========================= -->
+
+    <header>
+
+        <nav>
+
+            <a href="index.html" class="logo">
+                Wander<span>Lens</span>
+            </a>
+
+
+            <div class="menu-btn" id="menuBtn">
+                ☰
+            </div>
+
+
+            <ul id="menu">
+
+                <li>
+                    <a href="index.html">
+                        Home
+                    </a>
+                </li>
+
+                <li>
+                    <a href="mountains.html">
+                        Mountains
+                    </a>
+                </li>
+
+                <li>
+                    <a href="nature.html" class="active">
+                        Nature
+                    </a>
+                </li>
+
+                <li>
+                    <a href="landscapes.html">
+                        Landscape
+                    </a>
+                </li>
+
+                <li>
+                    <a href="travelling.html">
+                        Travelling
+                    </a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </header>
+
+
+
+    <!-- =========================
+         HERO
+    ========================= -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <small>
+                WanderLens • Nature • Greenery
+            </small>
+
+
+            <h1>
+                Nature &
+                <span>Greenery</span>
+            </h1>
+
+
+            <p>
+                Explore peaceful gardens, colorful flower fields,
+                lush forests, green landscapes and beautiful
+                natural spaces filled with life and color.
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         GALLERY
+    ========================= -->
+
+    <section class="gallery-section">
+
+
+        <div class="section-title">
+
+            <h2>
+                Explore <span>Nature</span>
+            </h2>
+
+            <p>
+                Discover beautiful greenery and colorful gardens.
+                Click any image to view it in full screen.
+            </p>
+
+        </div>
+
+
+
+        <!-- =========================
+             COLORFUL FLOWER GARDENS
+        ========================= -->
+
+        <h2 class="category-title">
+            🌸 Colorful Flower Gardens
+        </h2>
+
+
+        <div class="gallery">
+
+
+            <div class="gallery-card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1497250681960-ef046c08a56e?auto=format&fit=crop&w=1200&q=90"
+                    alt="Colorful garden surrounded by greenery">
+
+                <div class="image-info">
+
+                    <h3>
+                        Colorful Garden
+                    </h3>
+
+                    <p>
+                        A beautiful garden filled with
+                        flowers and fresh greenery.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="gallery-card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1495231916356-a86217efff12?auto=format&fit=crop&w=1200&q=90"
+                    alt="Beautiful colorful garden landscape">
+
+                <div class="image-info">
+
+                    <h3>
+                        Garden Colors
+                    </h3>
+
+                    <p>
+                        Bright flowers creating a peaceful
+                        natural landscape.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="gallery-card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1468327768560-75b778cbb551?auto=format&fit=crop&w=1200&q=90"
+                    alt="Large flower garden">
+
+                <div class="image-info">
+
+                    <h3>
+                        Blooming Garden
+                    </h3>
+
+                    <p>
+                        A vibrant garden covered with
+                        beautiful seasonal flowers.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =========================
+             LUSH GREENERY
+        ========================= -->
+
+        <h2 class="category-title">
+            🌿 Lush Greenery
+        </h2>
+
+
+        <div class="gallery">
+
+
+            <div class="gallery-card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=90"
+                    alt="Dense green forest">
+
+                <div class="image-info">
+
+                    <h3>
+                        Deep Green Forest
+                    </h3>
+
+                    <p>
+                        Tall trees and dense greenery
+                        creating a peaceful atmosphere.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="gallery-card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1511497584788-876760111969?auto=format&fit=crop&w=1200&q=90"
+                    alt="Green forest trees">
+
+                <div class="image-info">
+
+                    <h3>
+                        Forest Canopy
+                    </h3>
+
+                    <p>
+                        A natural view surrounded by
+                        layers of beautiful green trees.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="gallery-card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=1200&q=90"
+                    alt="Green trees in nature">
+
+                <div class="image-info">
+
+                    <h3>
+                        Green Escape
+                    </h3>
+
+                    <p>
+                        Fresh trees and peaceful
+                        natural surroundings.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =========================
+             FLOWER FIELDS
+        ========================= -->
+
+        <h2 class="category-title">
+            🌷 Colorful Flower Fields
+        </h2>
+
+
+        <div class="gallery">
+
+
+            <div class="gallery-card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=1200&q=90"
+                    alt="Large colorful flower field">
+
+                <div class="image-info">
+
+                    <h3>
+                        Flower Field
+                    </h3>
+
+                    <p>
+                        A wide natural field filled with
+                        colorful flowers.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="gallery-card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=1200&q=90"
+                    alt="Green landscape with flowering trees">
+
+                <div class="image-info">
+
+                    <h3>
+                        Spring Landscape
+                    </h3>
+
+                    <p>
+                        Fresh greenery and beautiful
+                        seasonal colors.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="gallery-card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?auto=format&fit=crop&w=1200&q=90"
+                    alt="Colorful flowers growing together">
+
+                <div class="image-info">
+
+                    <h3>
+                        Wildflower Colors
+                    </h3>
+
+                    <p>
+                        Many colorful flowers growing
+                        naturally together.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =========================
+             BOTANICAL GARDENS
+        ========================= -->
+
+        <h2 class="category-title">
+            🌺 Botanical Garden Views
+        </h2>
+
+
+        <div class="gallery">
+
+
+            <div class="gallery-card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=1200&q=90"
+                    alt="Beautiful botanical garden">
+
+                <div class="image-info">
+
+                    <h3>
+                        Botanical Paradise
+                    </h3>
+
+                    <p>
+                        A peaceful garden filled with
+                        plants and colorful flowers.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="gallery-card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=1200&q=90"
+                    alt="Large green garden">
+
+                <div class="image-info">
+
+                    <h3>
+                        Green Garden Walk
+                    </h3>
+
+                    <p>
+                        A beautiful garden path surrounded
+                        by rich greenery.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="gallery-card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1598902108854-10e335adac99?auto=format&fit=crop&w=1200&q=90"
+                    alt="Lush garden landscape">
+
+                <div class="image-info">
+
+                    <h3>
+                        Garden Paradise
+                    </h3>
+
+                    <p>
+                        A lush outdoor space filled with
+                        plants, flowers and natural beauty.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =========================
+             SPRING GREENERY
+        ========================= -->
+
+        <h2 class="category-title">
+            🌼 Spring & Natural Beauty
+        </h2>
+
+
+        <div class="gallery">
+
+
+            <div class="gallery-card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1462275646964-a0e3386b89fa?auto=format&fit=crop&w=1200&q=90"
+                    alt="Spring flower garden">
+
+                <div class="image-info">
+
+                    <h3>
+                        Spring Bloom
+                    </h3>
+
+                    <p>
+                        A colorful spring scene filled
+                        with flowers and greenery.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="gallery-card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?auto=format&fit=crop&w=1200&q=90"
+                    alt="Fresh green natural landscape">
+
+                <div class="image-info">
+
+                    <h3>
+                        Fresh Nature
+                    </h3>
+
+                    <p>
+                        Fresh green scenery creating
+                        a calm natural atmosphere.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="gallery-card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=1200&q=90"
+                    alt="Beautiful spring nature">
+
+                <div class="image-info">
+
+                    <h3>
+                        Spring Garden
+                    </h3>
+
+                    <p>
+                        A peaceful natural scene with
+                        fresh seasonal greenery.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =========================
+         LIGHTBOX
+    ========================= -->
+
+    <div class="lightbox" id="lightbox">
+
+
+        <button class="close-btn" id="closeBtn">
+            ×
+        </button>
+
+
+        <button class="prev" id="prevBtn">
+            ❮
+        </button>
+
+
+        <img
+            src=""
+            alt="Nature Image"
+            id="lightboxImage">
+
+
+        <button class="next" id="nextBtn">
+            ❯
+        </button>
+
+
+    </div>
+
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer>
+
+        © 2026 WanderLens | Nature & Greenery Gallery
+
+    </footer>
+
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
+
+    <script>
+
+        /* =========================
+           MOBILE MENU
+        ========================= */
+
+        const menuBtn =
+            document.getElementById("menuBtn");
+
+        const menu =
+            document.getElementById("menu");
+
+
+        menuBtn.addEventListener("click", function () {
+
+            menu.classList.toggle("active");
+
+        });
+
+
+        const menuLinks =
+            document.querySelectorAll("#menu a");
+
+
+        menuLinks.forEach(function (link) {
+
+            link.addEventListener("click", function () {
+
+                menu.classList.remove("active");
+
+            });
+
+        });
+
+
+
+        /* =========================
+           LIGHTBOX
+        ========================= */
+
+        const cards =
+            document.querySelectorAll(".gallery-card");
+
+
+        const lightbox =
+            document.getElementById("lightbox");
+
+
+        const lightboxImage =
+            document.getElementById("lightboxImage");
+
+
+        const closeBtn =
+            document.getElementById("closeBtn");
+
+
+        const prevBtn =
+            document.getElementById("prevBtn");
+
+
+        const nextBtn =
+            document.getElementById("nextBtn");
+
+
+        let currentIndex = 0;
+
+
+        const images = [];
+
+
+        cards.forEach(function (card) {
+
+            const image =
+                card.querySelector("img");
+
+            images.push(image);
+
+        });
+
+
+
+        /* =========================
+           OPEN IMAGE
+        ========================= */
+
+        cards.forEach(function (card, index) {
+
+            card.addEventListener("click", function () {
+
+                currentIndex = index;
+
+                showImage();
+
+                lightbox.classList.add("active");
+
+            });
+
+        });
+
+
+
+        /* =========================
+           SHOW IMAGE
+        ========================= */
+
+        function showImage() {
+
+            lightboxImage.src =
+                images[currentIndex].src;
+
+            lightboxImage.alt =
+                images[currentIndex].alt;
+
+        }
+
+
+
+        /* =========================
+           NEXT
+        ========================= */
+
+        nextBtn.addEventListener("click", function () {
+
+            currentIndex++;
+
+            if (currentIndex >= images.length) {
+
+                currentIndex = 0;
+
+            }
+
+            showImage();
+
+        });
+
+
+
+        /* =========================
+           PREVIOUS
+        ========================= */
+
+        prevBtn.addEventListener("click", function () {
+
+            currentIndex--;
+
+            if (currentIndex < 0) {
+
+                currentIndex = images.length - 1;
+
+            }
+
+            showImage();
+
+        });
+
+
+
+        /* =========================
+           CLOSE
+        ========================= */
+
+        closeBtn.addEventListener("click", function () {
+
+            lightbox.classList.remove("active");
+
+        });
+
+
+
+        /* =========================
+           CLICK OUTSIDE
+        ========================= */
+
+        lightbox.addEventListener("click", function (event) {
+
+            if (event.target === lightbox) {
+
+                lightbox.classList.remove("active");
+
+            }
+
+        });
+
+
+
+        /* =========================
+           KEYBOARD
+        ========================= */
+
+        document.addEventListener("keydown", function (event) {
+
+            if (!lightbox.classList.contains("active")) {
+                return;
+            }
+
+
+            if (event.key === "ArrowRight") {
+
+                nextBtn.click();
+
+            }
+
+
+            if (event.key === "ArrowLeft") {
+
+                prevBtn.click();
+
+            }
+
+
+            if (event.key === "Escape") {
+
+                closeBtn.click();
+
+            }
+
+        });
+
+    </script>
+
+
+</body>
+
+</html>

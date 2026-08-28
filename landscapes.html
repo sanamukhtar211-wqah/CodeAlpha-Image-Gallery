@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>WanderLens | Landscapes</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+
+        /* ================= BASIC ================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Poppins", sans-serif;
+            background: #07111f;
+            color: white;
+        }
+
+
+        /* ================= NAVBAR ================= */
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+
+            background: rgba(7, 17, 31, 0.88);
+
+            backdrop-filter: blur(12px);
+
+            border-bottom:
+                1px solid rgba(255,255,255,0.08);
+        }
+
+
+        nav {
+            max-width: 1200px;
+            margin: auto;
+
+            padding: 18px 25px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+
+        .logo {
+            text-decoration: none;
+            color: white;
+
+            font-size: 25px;
+            font-weight: 800;
+        }
+
+
+        .logo span {
+            color: #49e3c2;
+        }
+
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 28px;
+        }
+
+
+        nav ul a {
+            color: #dbe7f3;
+            text-decoration: none;
+
+            font-size: 14px;
+
+            transition: 0.3s;
+        }
+
+
+        nav ul a:hover,
+        nav ul a.active {
+            color: #49e3c2;
+        }
+
+
+        .menu-btn {
+            display: none;
+
+            font-size: 27px;
+            cursor: pointer;
+        }
+
+
+        /* ================= HERO ================= */
+
+        .hero {
+            min-height: 65vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+
+            padding: 120px 25px 70px;
+
+            background:
+                linear-gradient(
+                    rgba(3, 10, 20, 0.38),
+                    rgba(3, 10, 20, 0.86)
+                ),
+
+                url("https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1800&q=90")
+                center/cover no-repeat;
+        }
+
+
+        .hero-content {
+            max-width: 850px;
+        }
+
+
+        .hero-content small {
+            display: inline-block;
+
+            color: #49e3c2;
+
+            letter-spacing: 3px;
+
+            text-transform: uppercase;
+
+            font-weight: 600;
+
+            margin-bottom: 15px;
+        }
+
+
+        .hero-content h1 {
+            font-size: clamp(42px, 7vw, 72px);
+
+            line-height: 1.05;
+
+            margin-bottom: 20px;
+        }
+
+
+        .hero-content h1 span {
+            color: #49e3c2;
+        }
+
+
+        .hero-content p {
+            max-width: 680px;
+
+            margin: auto;
+
+            color: #d7e1ec;
+
+            line-height: 1.8;
+
+            font-size: 15px;
+        }
+
+
+        /* ================= GALLERY ================= */
+
+        .gallery-section {
+            max-width: 1200px;
+
+            margin: auto;
+
+            padding: 85px 25px;
+        }
+
+
+        .section-title {
+            text-align: center;
+
+            margin-bottom: 50px;
+        }
+
+
+        .section-title h2 {
+            font-size: clamp(30px, 5vw, 45px);
+
+            margin-bottom: 10px;
+        }
+
+
+        .section-title h2 span {
+            color: #49e3c2;
+        }
+
+
+        .section-title p {
+            color: #aebdce;
+
+            font-size: 14px;
+        }
+
+
+        /* ================= IMAGE GRID ================= */
+
+        .gallery {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 22px;
+        }
+
+
+        .gallery-item {
+            position: relative;
+
+            height: 280px;
+
+            overflow: hidden;
+
+            border-radius: 20px;
+
+            cursor: pointer;
+
+            background: #111c2b;
+
+            border:
+                1px solid rgba(255,255,255,0.08);
+
+            transition: 0.3s;
+        }
+
+
+        .gallery-item:hover {
+            transform: translateY(-6px);
+
+            border-color: #49e3c2;
+
+            box-shadow:
+                0 15px 35px rgba(73,227,194,0.14);
+        }
+
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+            display: block;
+
+            transition: 0.6s;
+        }
+
+
+        .gallery-item:hover img {
+            transform: scale(1.08);
+        }
+
+
+        /* ================= IMAGE OVERLAY ================= */
+
+        .image-info {
+            position: absolute;
+
+            left: 0;
+            right: 0;
+            bottom: 0;
+
+            padding: 45px 20px 18px;
+
+            background:
+                linear-gradient(
+                    transparent,
+                    rgba(0,0,0,0.85)
+                );
+
+            pointer-events: none;
+        }
+
+
+        .image-info h3 {
+            font-size: 18px;
+
+            margin-bottom: 4px;
+        }
+
+
+        .image-info p {
+            color: #cbd5e1;
+
+            font-size: 12px;
+        }
+
+
+        /* ================= LIGHTBOX ================= */
+
+        .lightbox {
+            position: fixed;
+
+            inset: 0;
+
+            background:
+                rgba(0,0,0,0.94);
+
+            z-index: 2000;
+
+            display: none;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 25px;
+        }
+
+
+        .lightbox.show {
+            display: flex;
+        }
+
+
+        .lightbox img {
+            max-width: 90%;
+
+            max-height: 82vh;
+
+            object-fit: contain;
+
+            border-radius: 12px;
+
+            box-shadow:
+                0 20px 60px rgba(0,0,0,0.6);
+        }
+
+
+        /* CLOSE BUTTON */
+
+        .close-btn {
+            position: absolute;
+
+            top: 25px;
+            right: 30px;
+
+            width: 45px;
+            height: 45px;
+
+            border-radius: 50%;
+
+            border: none;
+
+            background: #49e3c2;
+
+            color: #061019;
+
+            font-size: 25px;
+
+            cursor: pointer;
+
+            font-weight: bold;
+        }
+
+
+        /* NEXT / PREVIOUS */
+
+        .prev,
+        .next {
+            position: absolute;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            width: 48px;
+            height: 48px;
+
+            border-radius: 50%;
+
+            border: 1px solid
+                rgba(73,227,194,0.5);
+
+            background:
+                rgba(7,17,31,0.85);
+
+            color: #49e3c2;
+
+            font-size: 25px;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+
+        .prev {
+            left: 25px;
+        }
+
+
+        .next {
+            right: 25px;
+        }
+
+
+        .prev:hover,
+        .next:hover {
+            background: #49e3c2;
+
+            color: #061019;
+        }
+
+
+        /* IMAGE COUNTER */
+
+        .counter {
+            position: absolute;
+
+            bottom: 25px;
+
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            color: #dbe7f3;
+
+            font-size: 13px;
+
+            background:
+                rgba(7,17,31,0.75);
+
+            padding: 7px 15px;
+
+            border-radius: 20px;
+        }
+
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            text-align: center;
+
+            padding: 25px;
+
+            background: #040a13;
+
+            border-top:
+                1px solid rgba(255,255,255,0.08);
+
+            color: #94a5b8;
+
+            font-size: 13px;
+        }
+
+
+        /* ================= TABLET ================= */
+
+        @media (max-width: 900px) {
+
+            .gallery {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .gallery-item {
+                height: 260px;
+            }
+        }
+
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 700px) {
+
+            .menu-btn {
+                display: block;
+            }
+
+
+            nav ul {
+                position: absolute;
+
+                top: 70px;
+                left: -100%;
+
+                width: 100%;
+
+                background: #091524;
+
+                flex-direction: column;
+
+                text-align: center;
+
+                padding: 25px 0;
+
+                gap: 18px;
+
+                transition: 0.3s;
+            }
+
+
+            nav ul.active {
+                left: 0;
+            }
+
+
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+
+
+            .gallery-item {
+                height: 280px;
+            }
+
+
+            .prev {
+                left: 10px;
+            }
+
+
+            .next {
+                right: 10px;
+            }
+
+
+            .lightbox img {
+                max-width: 82%;
+            }
+        }
+
+
+        /* ================= SMALL MOBILE ================= */
+
+        @media (max-width: 500px) {
+
+            nav {
+                padding: 16px 18px;
+            }
+
+
+            .hero {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+
+            .hero-content p {
+                font-size: 14px;
+            }
+
+
+            .gallery-section {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+
+            .gallery-item {
+                height: 250px;
+            }
+
+
+            .close-btn {
+                top: 15px;
+                right: 15px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= NAVBAR ================= -->
+
+    <header>
+
+        <nav>
+
+            <a href="index.html" class="logo">
+                Wander<span>Lens</span>
+            </a>
+
+
+            <div class="menu-btn" id="menuBtn">
+                ☰
+            </div>
+
+
+            <ul id="menu">
+
+                <li>
+                    <a href="index.html">
+                        Home
+                    </a>
+                </li>
+
+                <li>
+                    <a href="mountains.html">
+                        Mountains
+                    </a>
+                </li>
+
+                <li>
+                    <a href="nature.html">
+                        Nature
+                    </a>
+                </li>
+
+                <li>
+                    <a href="landscapes.html"
+                       class="active">
+                        Landscapes
+                    </a>
+                </li>
+
+                <li>
+                    <a href="travelling.html">
+                        Traveling
+                    </a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </header>
+
+
+
+    <!-- ================= HERO ================= -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <small>
+                WanderLens • Landscapes
+            </small>
+
+            <h1>
+                Beautiful <span>Landscapes</span>
+            </h1>
+
+            <p>
+                Explore peaceful lakes, dramatic skies,
+                colorful sunsets, open horizons and
+                breathtaking scenic views captured
+                from different parts of the world.
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================= GALLERY ================= -->
+
+    <section class="gallery-section">
+
+        <div class="section-title">
+
+            <h2>
+                Explore <span>Landscapes</span>
+            </h2>
+
+            <p>
+                Click any image to view it in full screen.
+            </p>
+
+        </div>
+
+
+        <div class="gallery">
+
+
+            <!-- IMAGE 1 -->
+
+            <div class="gallery-item">
+
+                <img
+                    src="https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1200&q=90"
+                    alt="Beautiful scenic landscape">
+
+                <div class="image-info">
+
+                    <h3>
+                        Golden Horizon
+                    </h3>
+
+                    <p>
+                        A peaceful scenic view
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- IMAGE 2 -->
+
+            <div class="gallery-item">
+
+                <img
+                    src="https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&fit=crop&w=1200&q=90"
+                    alt="Sunset landscape">
+
+                <div class="image-info">
+
+                    <h3>
+                        Sunset Glow
+                    </h3>
+
+                    <p>
+                        Warm colors across the horizon
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- IMAGE 3 -->
+
+            <div class="gallery-item">
+
+                <img
+                    src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=90"
+                    alt="Open scenic landscape">
+
+                <div class="image-info">
+
+                    <h3>
+                        Open Horizon
+                    </h3>
+
+                    <p>
+                        Wide and peaceful scenery
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- IMAGE 4 -->
+
+            <div class="gallery-item">
+
+                <img
+                    src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?auto=format&fit=crop&w=1200&q=90"
+                    alt="Beautiful countryside landscape">
+
+                <div class="image-info">
+
+                    <h3>
+                        Quiet Countryside
+                    </h3>
+
+                    <p>
+                        A calm natural horizon
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- IMAGE 5 -->
+
+            <div class="gallery-item">
+
+                <img
+                    src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1200&q=90"
+                    alt="Colorful sky landscape">
+
+                <div class="image-info">
+
+                    <h3>
+                        Painted Sky
+                    </h3>
+
+                    <p>
+                        Beautiful colors in the sky
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- IMAGE 6 -->
+
+            <div class="gallery-item">
+
+                <img
+                    src="https://images.unsplash.com/photo-1501854140801-50d01698950b?auto=format&fit=crop&w=1200&q=90"
+                    alt="Wide scenic view">
+
+                <div class="image-info">
+
+                    <h3>
+                        Endless View
+                    </h3>
+
+                    <p>
+                        A wide cinematic landscape
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- IMAGE 7 -->
+
+            <div class="gallery-item">
+
+                <img
+                    src="https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1200&q=90"
+                    alt="Distant horizon">
+
+                <div class="image-info">
+
+                    <h3>
+                        Distant Horizon
+                    </h3>
+
+                    <p>
+                        Soft colors and open space
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- IMAGE 8 -->
+
+            <div class="gallery-item">
+
+                <img
+                    src="https://images.unsplash.com/photo-1494783367193-149034c05e8f?auto=format&fit=crop&w=1200&q=90"
+                    alt="Scenic landscape view">
+
+                <div class="image-info">
+
+                    <h3>
+                        Scenic Moment
+                    </h3>
+
+                    <p>
+                        A peaceful view of the world
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- IMAGE 9 -->
+
+            <div class="gallery-item">
+
+                <img
+                    src="https://images.unsplash.com/photo-1473445361085-b9a07f55608b?auto=format&fit=crop&w=1200&q=90"
+                    alt="Beautiful evening landscape">
+
+                <div class="image-info">
+
+                    <h3>
+                        Evening Light
+                    </h3>
+
+                    <p>
+                        A calm evening atmosphere
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================= LIGHTBOX ================= -->
+
+    <div class="lightbox" id="lightbox">
+
+
+        <button class="close-btn" id="closeBtn">
+            ×
+        </button>
+
+
+        <button class="prev" id="prevBtn">
+            ‹
+        </button>
+
+
+        <img
+            id="lightboxImage"
+            src=""
+            alt="Large landscape image">
+
+
+        <button class="next" id="nextBtn">
+            ›
+        </button>
+
+
+        <div class="counter" id="counter">
+            1 / 9
+        </div>
+
+
+    </div>
+
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        © 2026 WanderLens | Landscapes Gallery
+
+    </footer>
+
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+
+        /* ================= MOBILE MENU ================= */
+
+        const menuBtn =
+            document.getElementById("menuBtn");
+
+        const menu =
+            document.getElementById("menu");
+
+
+        menuBtn.addEventListener(
+            "click",
+            function () {
+
+                menu.classList.toggle("active");
+
+            }
+        );
+
+
+        const menuLinks =
+            document.querySelectorAll("#menu a");
+
+
+        menuLinks.forEach(function(link) {
+
+            link.addEventListener(
+                "click",
+                function () {
+
+                    menu.classList.remove("active");
+
+                }
+            );
+
+        });
+
+
+
+        /* ================= LIGHTBOX ================= */
+
+        const images =
+            document.querySelectorAll(
+                ".gallery-item img"
+            );
+
+
+        const lightbox =
+            document.getElementById("lightbox");
+
+
+        const lightboxImage =
+            document.getElementById("lightboxImage");
+
+
+        const closeBtn =
+            document.getElementById("closeBtn");
+
+
+        const nextBtn =
+            document.getElementById("nextBtn");
+
+
+        const prevBtn =
+            document.getElementById("prevBtn");
+
+
+        const counter =
+            document.getElementById("counter");
+
+
+        let currentIndex = 0;
+
+
+
+        /* OPEN IMAGE */
+
+        images.forEach(function(image, index) {
+
+            image.addEventListener(
+                "click",
+                function () {
+
+                    currentIndex = index;
+
+                    showImage();
+
+                    lightbox.classList.add("show");
+
+                }
+            );
+
+        });
+
+
+
+        /* SHOW IMAGE */
+
+        function showImage() {
+
+            lightboxImage.src =
+                images[currentIndex].src;
+
+            lightboxImage.alt =
+                images[currentIndex].alt;
+
+            counter.textContent =
+                (currentIndex + 1)
+                + " / "
+                + images.length;
+
+        }
+
+
+
+        /* NEXT */
+
+        nextBtn.addEventListener(
+            "click",
+            function () {
+
+                currentIndex++;
+
+                if (currentIndex >= images.length) {
+                    currentIndex = 0;
+                }
+
+                showImage();
+
+            }
+        );
+
+
+
+        /* PREVIOUS */
+
+        prevBtn.addEventListener(
+            "click",
+            function () {
+
+                currentIndex--;
+
+                if (currentIndex < 0) {
+                    currentIndex = images.length - 1;
+                }
+
+                showImage();
+
+            }
+        );
+
+
+
+        /* CLOSE */
+
+        closeBtn.addEventListener(
+            "click",
+            function () {
+
+                lightbox.classList.remove("show");
+
+            }
+        );
+
+
+
+        /* CLOSE BY CLICKING BACKGROUND */
+
+        lightbox.addEventListener(
+            "click",
+            function(event) {
+
+                if (event.target === lightbox) {
+
+                    lightbox.classList.remove("show");
+
+                }
+
+            }
+        );
+
+
+
+        /* KEYBOARD */
+
+        document.addEventListener(
+            "keydown",
+            function(event) {
+
+                if (!lightbox.classList.contains("show")) {
+                    return;
+                }
+
+
+                if (event.key === "ArrowRight") {
+
+                    nextBtn.click();
+
+                }
+
+
+                if (event.key === "ArrowLeft") {
+
+                    prevBtn.click();
+
+                }
+
+
+                if (event.key === "Escape") {
+
+                    closeBtn.click();
+
+                }
+
+            }
+        );
+
+    </script>
+
+
+</body>
+
+</html>

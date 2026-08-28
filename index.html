@@ -1,0 +1,570 @@
+Image Gallery — Home Page
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>WanderLens | Image Gallery</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Poppins", sans-serif;
+            background: #07111f;
+            color: white;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(7, 17, 31, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: auto;
+            padding: 18px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            text-decoration: none;
+            color: white;
+            font-size: 25px;
+            font-weight: 800;
+        }
+
+        .logo span {
+            color: #49e3c2;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 28px;
+        }
+
+        nav ul a {
+            color: #dbe7f3;
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        nav ul a:hover,
+        nav ul a.active {
+            color: #49e3c2;
+        }
+
+        .menu-btn {
+            display: none;
+            font-size: 26px;
+            cursor: pointer;
+        }
+
+        /* ================= HERO ================= */
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+
+            padding: 120px 25px 70px;
+
+            background:
+                linear-gradient(
+                    rgba(3, 10, 20, 0.42),
+                    rgba(3, 10, 20, 0.82)
+                ),
+                url("https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1800&q=90")
+                center/cover no-repeat;
+        }
+
+        .hero-content {
+            max-width: 850px;
+        }
+
+        .hero-content small {
+            display: inline-block;
+            color: #49e3c2;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 18px;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(42px, 7vw, 78px);
+            line-height: 1.05;
+            margin-bottom: 22px;
+        }
+
+        .hero-content h1 span {
+            color: #49e3c2;
+        }
+
+        .hero-content p {
+            max-width: 650px;
+            margin: auto;
+            color: #d7e1ec;
+            line-height: 1.8;
+            font-size: 16px;
+        }
+
+        .explore-btn {
+            display: inline-block;
+            margin-top: 32px;
+            padding: 13px 28px;
+            border-radius: 30px;
+            background: #49e3c2;
+            color: #061019;
+            text-decoration: none;
+            font-weight: 700;
+            transition: 0.3s;
+        }
+
+        .explore-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(73, 227, 194, 0.25);
+        }
+
+        /* ================= CATEGORIES ================= */
+
+        .categories {
+            max-width: 1200px;
+            margin: auto;
+            padding: 90px 25px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: clamp(30px, 5vw, 45px);
+            margin-bottom: 10px;
+        }
+
+        .section-title h2 span {
+            color: #49e3c2;
+        }
+
+        .section-title p {
+            color: #aebdce;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .category-card {
+            position: relative;
+            height: 330px;
+            border-radius: 22px;
+            overflow: hidden;
+            text-decoration: none;
+            color: white;
+            border: 1px solid rgba(255,255,255,0.08);
+            background: #111c2b;
+        }
+
+        .category-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.6s;
+        }
+
+        .category-card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                transparent 25%,
+                rgba(0,0,0,0.85)
+            );
+        }
+
+        .category-card:hover img {
+            transform: scale(1.08);
+        }
+
+        .category-info {
+            position: absolute;
+            z-index: 2;
+            left: 25px;
+            right: 25px;
+            bottom: 24px;
+        }
+
+        .category-info h3 {
+            font-size: 24px;
+            margin-bottom: 7px;
+        }
+
+        .category-info p {
+            color: #d5dee8;
+            font-size: 13px;
+        }
+
+        .view-btn {
+            display: inline-block;
+            margin-top: 14px;
+            padding: 8px 17px;
+            border: 1px solid rgba(73,227,194,0.7);
+            border-radius: 20px;
+            color: #49e3c2;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* ================= ABOUT ================= */
+
+        .about {
+            max-width: 900px;
+            margin: auto;
+            padding: 20px 25px 100px;
+            text-align: center;
+        }
+
+        .about h2 {
+            font-size: 35px;
+            margin-bottom: 15px;
+        }
+
+        .about h2 span {
+            color: #49e3c2;
+        }
+
+        .about p {
+            color: #aebdce;
+            line-height: 1.9;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            background: #040a13;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            color: #94a5b8;
+            font-size: 13px;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 800px) {
+
+            .menu-btn {
+                display: block;
+            }
+
+            nav ul {
+                position: absolute;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                background: #091524;
+                flex-direction: column;
+                text-align: center;
+                padding: 25px 0;
+                gap: 18px;
+                transition: 0.3s;
+            }
+
+            nav ul.active {
+                left: 0;
+            }
+
+            .category-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .category-card {
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            nav {
+                padding: 16px 18px;
+            }
+
+            .hero {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .hero-content p {
+                font-size: 14px;
+            }
+
+            .categories {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .category-card {
+                height: 270px;
+            }
+
+            .category-info h3 {
+                font-size: 21px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <header>
+        <nav>
+
+            <a href="index.html" class="logo">
+                Wander<span>Lens</span>
+            </a>
+
+            <div class="menu-btn" id="menuBtn">☰</div>
+
+            <ul id="menu">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="#categories">Categories</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+
+        </nav>
+    </header>
+
+
+    <!-- ================= HERO ================= -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <small>Explore • Discover • Inspire</small>
+
+            <h1>
+                Explore the <span>Beauty</span> of the World
+            </h1>
+
+            <p>
+                Discover breathtaking mountains, peaceful nature,
+                stunning landscapes and unforgettable travel
+                destinations — all in one beautiful gallery.
+            </p>
+
+            <a href="#categories" class="explore-btn">
+                Explore Gallery
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= CATEGORIES ================= -->
+
+    <section class="categories" id="categories">
+
+        <div class="section-title">
+
+            <h2>
+                Explore Our <span>Gallery</span>
+            </h2>
+
+            <p>
+                Choose a category and discover beautiful moments.
+            </p>
+
+        </div>
+
+
+        <div class="category-grid">
+
+            <!-- Mountains -->
+
+            <a href="mountains.html" class="category-card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=90"
+                    alt="Mountains and Waterfalls">
+
+                <div class="category-info">
+
+                    <h3>Mountains & Waterfalls</h3>
+
+                    <p>
+                        Majestic peaks, rivers and breathtaking waterfalls.
+                    </p>
+
+                    <span class="view-btn">
+                        Explore →
+                    </span>
+
+                </div>
+
+            </a>
+
+
+            <!-- Nature -->
+
+            <a href="nature.html" class="category-card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1200&q=90"
+                    alt="Nature and Greenery">
+
+                <div class="category-info">
+
+                    <h3>Nature & Greenery</h3>
+
+                    <p>
+                        Peaceful forests, green fields and natural beauty.
+                    </p>
+
+                    <span class="view-btn">
+                        Explore →
+                    </span>
+
+                </div>
+
+            </a>
+
+
+            <!-- Landscapes -->
+
+            <a href="landscapes.html" class="category-card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=90"
+                    alt="Beautiful Landscapes">
+
+                <div class="category-info">
+
+                    <h3>Landscapes</h3>
+
+                    <p>
+                        Stunning skies, lakes, sunsets and scenic views.
+                    </p>
+
+                    <span class="view-btn">
+                        Explore →
+                    </span>
+
+                </div>
+
+            </a>
+
+
+            <!-- Traveling -->
+
+            <a href="travelling.html" class="category-card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=90"
+                    alt="Traveling">
+
+                <div class="category-info">
+
+                    <h3>Traveling</h3>
+
+                    <p>
+                        Inspiring roads, destinations and travel adventures.
+                    </p>
+
+                    <span class="view-btn">
+                        Explore →
+                    </span>
+
+                </div>
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= ABOUT ================= -->
+
+    <section class="about" id="about">
+
+        <h2>
+            About <span>WanderLens</span>
+        </h2>
+
+        <p>
+            WanderLens is a responsive image gallery created to
+            showcase the beauty of nature, landscapes, mountains
+            and travel destinations through an attractive and
+            user-friendly experience.
+        </p>
+
+    </section>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+        © 2026 WanderLens | Image Gallery
+    </footer>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+
+        const menuBtn = document.getElementById("menuBtn");
+        const menu = document.getElementById("menu");
+
+        menuBtn.addEventListener("click", function () {
+            menu.classList.toggle("active");
+        });
+
+        const menuLinks = document.querySelectorAll("#menu a");
+
+        menuLinks.forEach(function (link) {
+
+            link.addEventListener("click", function () {
+                menu.classList.remove("active");
+            });
+
+        });
+
+    </script>
+
+</body>
+</html>
+
